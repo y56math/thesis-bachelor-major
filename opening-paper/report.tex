@@ -1,65 +1,44 @@
-% !Mode:: "TeX:UTF-8"
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%          ,
-%      /\^/`\
-%     | \/   |                CONGRATULATIONS!
-%     | |    |             SPRING IS IN THE AIR!
-%     \ \    /                                                _ _
-%      '\\//'                                               _{ ' }_
-%        ||                     hithesis v3                { `.!.` }
-%        ||                                                ',_/Y\_,'
-%        ||  ,                   dustincys                   {_,_}
-%    |\  ||  |\          Email: yanshuoc@gmail.com             |
-%    | | ||  | |            https://yanshuo.name             (\|  /)
-%    | | || / /                                               \| //
-%    \ \||/ /       https://github.com/dustincys/hithesis      |//
-%      `\\//`   \\   \./    \\ /     //    \\./   \\   //   \\ |/ /
-%     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[fontset=windows,toc=true,type=bachelor,stage=opening,campus=weihai]{hithesisart}
-% 此处选项中不要有空格
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 必填选项
-% type=doctor|master|bachelor
-% stage=opening|midterm
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 选填选项（选填选项的缺省值已经尽可能满足了大多数需求，除非明确知道自己有什么
-% 需求）
-% campus=shenzhen|weihai|harbin
-%   含义：校区选项，默认harbin
-% fontset=windows|mac|ubuntu|fandol
-%   含义：前三个对应各自系统，fandol是开源字体。
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \graphicspath{{figures/}}
-
 
 \begin{document}
 
-\input{front/coverart.tex}
+\hitsetup{
+  ctitlecover={里德堡原子基态拓扑量子信息传输},%放在封面中使用，自由断行
+  caffil={理学院},
+  csubject={光电信息科学与工程},
+  cauthor={杨徵羽},
+  cstudentid={2191020215},
+  cclassid={1910202},
+  csupervisor={吴金雷},
+  % 日期自动使用当前时间，若需指定按如下方式修改：
+  %cdate={盘古开天地}
+  % cenrolldate={公元2020年}
+}
+
 \makecover
 
-% 深圳博士开题报告 -----------------------------------------------
+% !Mode:: "TeX:UTF-8"
+\section{课题背景及研究的目的和意义}
+\subsection{课题背景}
+（正文  宋体小4号字，多倍行距值1.25，段前0行，段后0行。字数3000字以上。具体的撰写要符合哈尔滨工业大学本科生毕业论文撰写规范的书写规定。）\cite{hithesis2017}\inlinecite{cnproceed}
+\subsection{研究的目的和意义}
+\section{国内外在该方向的研究现状及分析}
+\subsection{国外现状及分析}
+\subsection{国内现状及分析}
+\section{研究内容及拟解决的关键问题}
+\subsection{研究内容}
+\subsection{拟解决的关键问题}
+\section{拟采取的研究方法和技术路线、进度安排、预期达到的目标}
+\subsection{拟采取的研究方法和技术路线}
+\subsection{进度安排}
+\subsection{预期达到的目标}
+\section{课题已具备和所需的条件}
+\section{研究过程中可能遇到的困难和问题，解决的措施}
+\section{参考文献}
+\bibliographystyle{hithesis}
+\bibliography{reference}
 
-\input{body/report_shenzhen_doctor_opening}
-
-% 威海校区本科生开题报告结构 ----------------------------------------
-% \input{body/report_weihai_bachelor_opening}
-% \makebackcover
-% -------------------------------------------------------------
-
-% 威海校区本科生中期报告结构 ----------------------------------------
-% \input{body/report_weihai_bachelor_midterm}
-% \makebackcover
-% -------------------------------------------------------------
-
-% 哈尔滨校区本科生开题报告结构 --------------------------------------
-% \input{body/report_harbin_bachelor_opening}
-% -------------------------------------------------------------
+\makebackcover
 
 \end{document}
-
-% Local Variables:
-% TeX-engine: xetex
-% End:
