@@ -1,13 +1,12 @@
 \documentclass[10pt,aspectratio=43]{beamer}
-
 \usetheme{Berlin}
-\usecolortheme{sustech}
 
 \usepackage{amsmath,bm,amsfonts,amssymb,enumerate,graphicx,animate,epsfig,bbm,calc,color,ifthen,capt-of,multimedia}
 \usepackage{fancybox,xcolor,booktabs,colortbl}
 \usepackage{physics}
-\usepackage{../mycommand} % 我惯用的命令，在本project中，存储在本文件的父文件夹
+\usepackage{../mycommand}%我惯用的命令，在本project中，存储在本文件的父文件夹
 
+\usefonttheme{professionalfonts}
 \usepackage[UTF8,fontset=none,scheme=chinese]{ctex}
 \setmainfont{Times}
 \setsansfont{Arial}
@@ -15,10 +14,10 @@
 \setCJKmainfont{SimSun}[BoldFont=SimHei,ItalicFont=KaiTi]
 \setCJKsansfont{SimHei}
 \setCJKmonofont{Microsoft YaHei}
-\usefonttheme{professionalfonts}
 \usepackage{unicode-math}
 \setmathfont{XITS Math}
 
+\usecolortheme{sustech}
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \definecolor{mygray}{gray}{.9}
@@ -44,6 +43,8 @@
 	% identifierstyle=\color{red},
 	language=c
 }
+
+\setbeamertemplate{sidebar right}{}%去掉默认添加的navigarion symbols
 
 \usepackage[backend=biber,bibstyle=gb7714-2015,citestyle=verbose]{biblatex}
 \addbibresource{../reference.bib}
@@ -92,7 +93,7 @@
 \end{frame}
 \section{当前进展}
 \begin{frame}{哈密顿量}
-目前复现了 \footcite{PhysRevA.105.032417} 的一部分：两个Λ型原子与光场Raman相互作用。
+目前复现了\footcite{PhysRevA.105.032417}的一部分：两个Λ型原子与光场Raman相互作用。
 
 单个原子与光场作用的哈密顿量为（以下均忽略系数）
 \begin{equation}
@@ -109,7 +110,7 @@ H_{\mathrm{novdW},j}^\mathrm{I}=\hbar(\mathrm{e}^{\mathrm{i}t\delta}\Omega_j\ket
 \begin{frame}{哈密顿量}
 故两个原子的与光场作用的哈密顿量为
 \begin{multline}
-H^\mathrm{I}
+H^\mathrm{I}=I_1\otimes H_2+H_1\otimes I_2\\
 =\hbar(\Omega_1\mathrm{e}^{\mathrm{i}t\delta}\ketbra{gg}{rg}
 +\Omega_1\mathrm{e}^{\mathrm{i}t\delta}\ketbra{ge}{re}
 +\Omega_1\mathrm{e}^{\mathrm{i}t\delta}\ketbra{gr}{rr}\\
@@ -134,21 +135,26 @@ H^{\mathrm{II}}=\hbar(\Omega_1\eit{\delta}\ketbra{ge}{re}
 
 \end{frame}
 \begin{frame}{表象变换}
-经过了……多次变换，最终哈密顿量的形式为（是否展开？）
+将$ H^{\mathrm{II}} $中的不含时项对角化，将其本征态$ \ket{\psi_+},\ket{\psi_0},\ket{\psi_-} $作为新的基，再进行相互作用绘景变换，得到最终哈密顿量的形式为
 \begin{multline}
-H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\left(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}-\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\right)\\
-+\ket{eg}\left(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}+\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\right)\Bigg)+\hc
+H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}-\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\\
++\ket{eg}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}+\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\Bigg)+\hc
 \end{multline}
 \end{frame}
 \begin{frame}{有效哈密顿量}
-利用Canadian论文的方法，可得有效哈密顿量为
-\begin{multline}
-H_{\eff}=\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\frac{1}{\delta}\left(-\frac{1}{2}\ketbra{eg}{ge}\right)+\frac{1}{\delta+\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\hc\\
+利用论文\footcite{James2007EffectiveHT}的方法，可得有效哈密顿量为
+\small{\begin{multline}
+H_{\eff}=\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\frac{1}{\delta}\left(-\frac{1}{2}\ketbra{eg}{ge}\right)\\
++\frac{1}{\delta+\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\hc
 +\frac{1}{\delta-\sqrt{2}\Omega_p}\left(\frac{1}{4}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\\
-+\frac{1}{\delta}\left(\frac{1}{2}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\\
++\frac{1}{\delta}\left(\frac{1}{2}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)
 +\frac{1}{\delta+\sqrt{2}\Omega_p}\left(\frac{1}{4}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\Bigg)
-\end{multline}
-其中J12=…。这是一个SWAP门，J12反映了量子门的开关速率。
+\end{multline}}
+其中耦合系数
+\begin{equation}
+J_{12}=\frac{\Omega^2}{4}\left(\frac{1}{\delta-\sqrt{2}\Omega_p}-\frac{2}{\delta}+\frac{1}{\delta+\sqrt{2}\Omega_p}\right)=\frac{\Omega^2\Omega_p^2}{\delta^3-2\delta\Omega_p^2}
+\end{equation}
+这是一个SWAP门，$ J_{12} $反映了量子门的开关速率。
 \end{frame}
 \section{未来计划}
 \begin{frame}{快速SWAP门}
