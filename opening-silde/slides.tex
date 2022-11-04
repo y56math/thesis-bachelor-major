@@ -1,12 +1,14 @@
-\documentclass[10pt,aspectratio=43,table]{beamer} 
-%设置为 Beamer 文档类型，设置字体为 10pt，长宽比为16:9，数学字体为 serif 风格
-\batchmode
-\usepackage{graphicx}
-\usepackage{animate}
+\documentclass[10pt,aspectratio=43]{beamer}
+
+\usetheme{Berlin}
+\usecolortheme{sustech}
+
+\usepackage{amsmath,bm,amsfonts,amssymb,enumerate,graphicx,animate,epsfig,bbm,calc,color,ifthen,capt-of,multimedia}
+\usepackage{fancybox,xcolor,booktabs,colortbl}
+\usepackage{physics}
+\usepackage{../mycommand} % 我惯用的命令，在本project中，存储在本文件的父文件夹
 \usepackage{hyperref}
 
-%导入一些用到的宏包
-\usepackage{amsmath,bm,amsfonts,amssymb,enumerate,epsfig,bbm,calc,color,ifthen,capt-of,multimedia,hyperref}
 \usepackage[UTF8,fontset=none,scheme=chinese]{ctex}
 \setmainfont{Times}
 \setsansfont{Arial}
@@ -18,19 +20,14 @@
 \usepackage{unicode-math}
 \setmathfont{XITS Math}
 
-\usetheme{Berlin} %主题
-\usecolortheme{sustech} %主题颜色
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mygray}{gray}{.9}
+\definecolor{mypink}{rgb}{.99,.91,.95}
+\definecolor{mycyan}{cmyk}{.3,0,0,0}
 
 \usepackage[ruled,linesnumbered]{algorithm2e}
-
-\usepackage{fancybox}
-\usepackage{xcolor}
-\usepackage{listings}
-
-\usepackage{booktabs}
-\usepackage{colortbl}
-
-\newcommand{\Console}{Console}
+\usepackage{verbatim,listings}
 \lstset{ %
 	backgroundcolor=\color{white},   % choose the background color
 	basicstyle=\footnotesize\ttfamily,     % size of fonts used for the code
@@ -49,15 +46,9 @@
 	language=c
 }
 
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
-\definecolor{mygray}{gray}{.9}
-\definecolor{mypink}{rgb}{.99,.91,.95}
-\definecolor{mycyan}{cmyk}{.3,0,0,0}
-
 %题目，作者，学校，日期
 \title{里德堡原子基态拓扑量子信息传输}
-%\subtitle{\fontsize{9pt}{14pt}\textbf{子标题}}
+\subtitle{\fontsize{9pt}{14pt}\textbf{毕业论文开题报告}}
 \author{答辩人：杨徵羽 \quad 指导教师：吴金雷}
 \institute{哈尔滨工业大学(威海)理学院}
 \date{\today}
@@ -74,19 +65,8 @@
 \end{frame}
 }
 \beamerdefaultoverlayspecification{<+->}
-% -----------------------------------------------------------------------------
-\usepackage{physics}
-\newcommand{\hc}{\ensuremath{\mathrm{H.c.}}}
-\newcommand{\eff}{\ensuremath{\mathrm{eff}}}
-\newcommand{\ei}[1]{\ensuremath{\mathrm{e}^{\mathrm{i} #1}}}
-\newcommand{\eni}[1]{\ensuremath{\mathrm{e}^{\frac{\mathrm{i}}{\hbar} #1}}}
-\newcommand{\eit}[1]{\ensuremath{\mathrm{e}^{\mathrm{i}t #1}}}
-\newcommand{\eith}[1]{\ensuremath{\mathrm{e}^{\frac{\mathrm{i}t}{\hbar} #1}}}
-\newcommand{\enit}[1]{\ensuremath{\mathrm{e}^{-\mathrm{i}t #1}}}
-\newcommand{\enith}[1]{\ensuremath{\mathrm{e}^{-\frac{\mathrm{i}t}{\hbar} #1}}}
 
 \begin{document}
-% -----------------------------------------------------------------------------
 
 \frame{\titlepage}
 
@@ -95,7 +75,98 @@
 \tableofcontents
 \end{frame}
 
-% -----------------------------------------------------------------------------
+\section{课题背景}
+\begin{frame}{量子信息技术}
+摩尔定律，量子信息的快速计算、不可监听……总之非常有前景；但目前极不成熟，故很值得研究（两页？）
+\end{frame}
+\begin{frame}{量子比特与量子逻辑门}
+查Nielsen and Chuang
+\end{frame}
+\begin{frame}{实现量子逻辑门的物理方法}
+有……多种方法，我研究里德堡中性原子，它的优点有……（查老师毕业论文）
+\end{frame}
+\begin{frame}{研究里德堡原子系统的一般步骤}
+写哈密顿量、表象变换化简、大失谐近似求有效哈密顿量、分析系统性质（本来要解薛定谔方程，但可以直接从有效哈密顿量系数中看出我们要的性质）（大致说这几步的目的，绘景变换公式等方法在下节讲）
+\end{frame}
+\section{当前进展}
+\begin{frame}{哈密顿量}
+目前复现了[1]的一部分：两个Λ型原子与光场Raman相互作用。
+
+单个原子与光场作用的哈密顿量为（以下均忽略系数）
+\begin{equation}
+H_{\mathrm{novdW},j}^\mathrm{S}=\hbar(\omega_g\ketbra{g}{g}_j+\omega_i\ketbra{r}{r}_j+\omega_e\ketbra{e}{e}_j+(\Omega_j\ketbra{g}{r}_j+\Omega_p\ketbra{e}{r}_j+\hc))
+\end{equation}
+变换到相互作用绘景，得
+\begin{equation}\label{}
+\begin{gathered}
+H_{\mathrm{novdW},j}^\mathrm{I}=\hbar(\mathrm{e}^{\mathrm{i}t\delta}\Omega_j\ketbra{g}{r}_j+\mathrm{e}^{\mathrm{i}t\Delta}\Omega_p\ketbra{e}{r}_j+\hc),\\
+\delta=\Omega-\omega_r+\omega_g,\quad\Delta=\Omega_p-\omega_r+\omega_e
+\end{gathered}
+\end{equation}
+\end{frame}
+\begin{frame}{哈密顿量}
+故两个原子的与光场作用的哈密顿量为
+\begin{multline}
+H^\mathrm{I}
+=\hbar(\Omega_1\mathrm{e}^{\mathrm{i}t\delta}\ketbra{gg}{rg}
++\Omega_1\mathrm{e}^{\mathrm{i}t\delta}\ketbra{ge}{re}
++\Omega_1\mathrm{e}^{\mathrm{i}t\delta}\ketbra{gr}{rr}\\
++\Omega_p\mathrm{e}^{\mathrm{i}t\Delta}\ketbra{eg}{rg}
++\Omega_p\mathrm{e}^{\mathrm{i}t\Delta}\ketbra{ee}{re}
++\Omega_p\mathrm{e}^{\mathrm{i}t\Delta}\ketbra{er}{rr}\\
++\Omega_2\mathrm{e}^{\mathrm{i}t\delta}\ketbra{gg}{gr}
++\Omega_2\mathrm{e}^{\mathrm{i}t\delta}\ketbra{eg}{er}
++\Omega_2\mathrm{e}^{\mathrm{i}t\delta}\ketbra{rg}{rr}\\
++\Omega_p\mathrm{e}^{\mathrm{i}t\Delta}\ketbra{ge}{gr}
++\Omega_p\mathrm{e}^{\mathrm{i}t\Delta}\ketbra{ee}{er}
++\Omega_p\mathrm{e}^{\mathrm{i}t\Delta}\ketbra{re}{rr}
++\hc)
+\end{multline}
+考虑到van der Vaals相互作用，并采用旋波近似，经一系列分析，上式可简化为
+\begin{equation}\label{key}
+H^{\mathrm{II}}=\hbar(\Omega_1\eit{\delta}\ketbra{ge}{re}
++\Omega_p\ketbra{er}{rr}
++\Omega_2\eit{\delta}\ketbra{eg}{er}
++\Omega_p\ketbra{re}{rr}+\hc)
+\end{equation}
+
+\end{frame}
+\begin{frame}{表象变换}
+经过了……多次变换，最终哈密顿量的形式为（是否展开？）
+\begin{multline}
+H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\left(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}-\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\right)\\
++\ket{eg}\left(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}+\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\right)\Bigg)+\hc
+\end{multline}
+\end{frame}
+\begin{frame}{有效哈密顿量}
+利用Canadian论文的方法，可得有效哈密顿量为
+\begin{multline}
+H_{\eff}=\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\frac{1}{\delta}\left(-\frac{1}{2}\ketbra{eg}{ge}\right)+\frac{1}{\delta+\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\hc\\
++\frac{1}{\delta-\sqrt{2}\Omega_p}\left(\frac{1}{4}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\\
++\frac{1}{\delta}\left(\frac{1}{2}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\\
++\frac{1}{\delta+\sqrt{2}\Omega_p}\left(\frac{1}{4}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\Bigg)
+\end{multline}
+其中J12=…。这是一个SWAP门，J12反映了量子门的开关速率。
+\end{frame}
+\section{未来计划}
+\begin{frame}{快速SWAP门}
+在前式中，令delta-sqrt2omegap=0，保留前两项，有望构建具有…、…、…三个能级的系统，而J12数量级有望减小（……阶动力学），从而实现更快速的SWAP门。
+\end{frame}
+\begin{frame}{拓扑量子信息传输}
+将2个原子推广成一列原子，此时有望实现量子态从最左边传到最右边（论文截图）
+\end{frame}
+\begin{frame}{}
+\begin{center}
+\begin{minipage}{1\textwidth}
+	\setbeamercolor{mybox}{fg=white, bg=black!50!blue}
+ \begin{beamercolorbox}[wd=0.70\textwidth, rounded=true, shadow=true]{mybox}
+\LARGE \centering 请各位老师批评指正
+\end{beamercolorbox}
+ \end{minipage}
+\end{center}
+\end{frame}
+
+\begin{comment}
 \section{引言}  %引言
 \subsection{研究背景}
 \begin{frame}{研究背景}
@@ -332,7 +403,6 @@ label=python]
 	\end{minipage}
 \end{center}
 \end{frame}
+\end{comment}
 
-% -----------------------------------------------------------------------------
 \end{document}
-%文档结束
