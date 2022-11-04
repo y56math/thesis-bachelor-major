@@ -7,7 +7,6 @@
 \usepackage{fancybox,xcolor,booktabs,colortbl}
 \usepackage{physics}
 \usepackage{../mycommand} % 我惯用的命令，在本project中，存储在本文件的父文件夹
-\usepackage{hyperref}
 
 \usepackage[UTF8,fontset=none,scheme=chinese]{ctex}
 \setmainfont{Times}
@@ -45,6 +44,9 @@
 	% identifierstyle=\color{red},
 	language=c
 }
+
+\usepackage[backend=biber,bibstyle=gb7714-2015,citestyle=verbose]{biblatex}
+\addbibresource{../reference.bib}
 
 %题目，作者，学校，日期
 \title{里德堡原子基态拓扑量子信息传输}
@@ -90,7 +92,7 @@
 \end{frame}
 \section{当前进展}
 \begin{frame}{哈密顿量}
-目前复现了[1]的一部分：两个Λ型原子与光场Raman相互作用。
+目前复现了 \footcite{PhysRevA.105.032417} 的一部分：两个Λ型原子与光场Raman相互作用。
 
 单个原子与光场作用的哈密顿量为（以下均忽略系数）
 \begin{equation}
@@ -155,14 +157,20 @@ H_{\eff}=\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbr
 \begin{frame}{拓扑量子信息传输}
 将2个原子推广成一列原子，此时有望实现量子态从最左边传到最右边（论文截图）
 \end{frame}
+
+% 现在在每页脚注加参考文献，故不需要专门放一页参考文献
+%\begin{frame}{参考文献}
+%\printbibliography
+%\end{frame}
+
 \begin{frame}{}
 \begin{center}
 \begin{minipage}{1\textwidth}
-	\setbeamercolor{mybox}{fg=white, bg=black!50!blue}
- \begin{beamercolorbox}[wd=0.70\textwidth, rounded=true, shadow=true]{mybox}
+\setbeamercolor{mybox}{fg=white, bg=black!50!blue}
+\begin{beamercolorbox}[wd=0.70\textwidth, rounded=true, shadow=true]{mybox}
 \LARGE \centering 请各位老师批评指正
 \end{beamercolorbox}
- \end{minipage}
+\end{minipage}
 \end{center}
 \end{frame}
 
