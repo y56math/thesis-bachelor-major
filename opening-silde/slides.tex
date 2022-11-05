@@ -94,19 +94,30 @@
 \section{当前进展}
 \begin{frame}{哈密顿量}
 目前复现了\footcite{PhysRevA.105.032417}的一部分：两个Λ型原子与光场Raman相互作用。
+\begin{figure}
+\centering
+\includegraphics[height=0.5\textheight]{figures/pra-energy-level}
+\caption{能级示意图（只显示了其中一个原子）}
+\label{fig:pra-energy-level}
+\end{figure}
+\end{frame}
 
-单个原子与光场作用的哈密顿量为（以下均忽略系数）
+\begin{frame}{哈密顿量}
+在半经典理论中，单个原子与光场作用的哈密顿量为
 \begin{equation}
 H_{\mathrm{novdW},j}^\mathrm{S}=\hbar(\omega_g\ketbra{g}{g}_j+\omega_i\ketbra{r}{r}_j+\omega_e\ketbra{e}{e}_j+(\Omega_j\ketbra{g}{r}_j+\Omega_p\ketbra{e}{r}_j+\hc))
 \end{equation}
 变换到相互作用绘景，得
 \begin{equation}\label{}
-\begin{gathered}
-H_{\mathrm{novdW},j}^\mathrm{I}=\hbar(\mathrm{e}^{\mathrm{i}t\delta}\Omega_j\ketbra{g}{r}_j+\mathrm{e}^{\mathrm{i}t\Delta}\Omega_p\ketbra{e}{r}_j+\hc),\\
-\delta=\Omega-\omega_r+\omega_g,\quad\Delta=\Omega_p-\omega_r+\omega_e
-\end{gathered}
+H_{\mathrm{novdW},j}^\mathrm{I}=\hbar(\mathrm{e}^{\mathrm{i}t\delta}\Omega_j\ketbra{g}{r}_j+\mathrm{e}^{\mathrm{i}t\Delta}\Omega_p\ketbra{e}{r}_j+\hc)
+\end{equation}
+其中$ \delta=\Omega-\omega_r+\omega_g,\Delta=\Omega_p-\omega_r+\omega_e
+ $为失谐量，其量级满足
+\begin{equation}
+\Delta\gg\delta\sim\Omega_p\gg\Omega_j
 \end{equation}
 \end{frame}
+
 \begin{frame}{哈密顿量}
 故两个原子的与光场作用的哈密顿量为
 \begin{multline}
@@ -126,7 +137,7 @@ H^\mathrm{I}=I_1\otimes H_2+H_1\otimes I_2\\
 +\hc)
 \end{multline}
 考虑到van der Vaals相互作用，并采用旋波近似，经一系列分析，上式可简化为
-\begin{equation}\label{key}
+\begin{equation}
 H^{\mathrm{II}}=\hbar(\Omega_1\eit{\delta}\ketbra{ge}{re}
 +\Omega_p\ketbra{er}{rr}
 +\Omega_2\eit{\delta}\ketbra{eg}{er}
@@ -135,25 +146,33 @@ H^{\mathrm{II}}=\hbar(\Omega_1\eit{\delta}\ketbra{ge}{re}
 
 \end{frame}
 \begin{frame}{表象变换}
-将$ H^{\mathrm{II}} $中的不含时项对角化，将其本征态$ \ket{\psi_+},\ket{\psi_0},\ket{\psi_-} $作为新的基，再进行相互作用绘景变换，得到最终哈密顿量的形式为
-\begin{multline}
+将$ H^{\mathrm{II}} $中的不含时项对角化得
+{\small\begin{equation}
+\begin{gathered}
+E_+=\sqrt{2}\hbar\Omega_p,\quad\ket{\psi_+}=\frac{1}{2}\ket{er}+\frac{1}{\sqrt{2}}\ket{rr}+\frac{1}{2}\ket{re},\\
+E_0=0,\quad\ket{\psi_0}=\frac{1}{\sqrt{2}}\ket{er}-\frac{1}{\sqrt{2}}\ket{re},\\
+E_-=-\sqrt{2}\hbar\Omega_p,\quad\ket{\psi_-}=\frac{1}{2}\ket{er}-\frac{1}{\sqrt{2}}\ket{rr}+\frac{1}{2}\ket{re}.
+\end{gathered}
+\end{equation}}
+将其本征态$ \ket{\psi_+},\ket{\psi_0},\ket{\psi_-} $作为新的基，再进行相互作用绘景变换，得到最终哈密顿量的形式为
+{\small\begin{multline}
 H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}-\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\\
 +\ket{eg}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}+\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\Bigg)+\hc
-\end{multline}
+\end{multline}}
 \end{frame}
 \begin{frame}{有效哈密顿量}
 利用论文\footcite{James2007EffectiveHT}的方法，可得有效哈密顿量为
-\small{\begin{multline}
-H_{\eff}=\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\frac{1}{\delta}\left(-\frac{1}{2}\ketbra{eg}{ge}\right)\\
+{\footnotesize\begin{multline}
+H_{\eff}=\hbar\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\frac{1}{\delta}\left(-\frac{1}{2}\ketbra{eg}{ge}\right)\\
 +\frac{1}{\delta+\sqrt{2}\Omega_p}\left(-\frac{1}{4}\ketbra{eg}{ge}\right)+\hc
 +\frac{1}{\delta-\sqrt{2}\Omega_p}\left(\frac{1}{4}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\\
 +\frac{1}{\delta}\left(\frac{1}{2}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)
 +\frac{1}{\delta+\sqrt{2}\Omega_p}\left(\frac{1}{4}(-\ketbra{ge}{ge}-\ketbra{eg}{eg})\right)\Bigg)
 \end{multline}}
-其中耦合系数
-\begin{equation}
-J_{12}=\frac{\Omega^2}{4}\left(\frac{1}{\delta-\sqrt{2}\Omega_p}-\frac{2}{\delta}+\frac{1}{\delta+\sqrt{2}\Omega_p}\right)=\frac{\Omega^2\Omega_p^2}{\delta^3-2\delta\Omega_p^2}
-\end{equation}
+其中耦合系数（$ \ketbra{eg}{ge} $项的系数）为
+{\small\begin{equation}
+J_{12}=\frac{\Omega^2}{4}\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}-\frac{2}{\delta}+\frac{1}{\delta+\sqrt{2}\Omega_p}\Bigg)=\frac{\Omega^2\Omega_p^2}{\delta^3-2\delta\Omega_p^2}
+\end{equation}}
 这是一个SWAP门，$ J_{12} $反映了量子门的开关速率。
 \end{frame}
 \section{未来计划}
