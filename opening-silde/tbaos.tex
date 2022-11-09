@@ -48,6 +48,7 @@
 \setbeamertemplate{caption}[numbered]%添加图片的编号
 \setbeamertemplate{sidebar right}{}%去掉默认添加的navigarion symbols
 \setbeamercovered{transparent}%使未点出来的文字呈现透明，默认0.15透明度
+%\beamerdefaultoverlayspecification{}
 
 \usepackage[backend=biber,bibstyle=gb7714-2015,citestyle=verbose]{biblatex}
 \addbibresource{../reference.bib}
@@ -70,7 +71,6 @@
 	\tableofcontents[currentsection]
 \end{frame}
 }
-\beamerdefaultoverlayspecification{<+->}
 
 \begin{document}
 
@@ -260,7 +260,7 @@ J_{12}=\frac{\Omega^2}{4}\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}-\frac{2}{\delta
 H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}-\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\\
 +\ket{eg}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}+\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\Bigg)+\hc
 \end{multline*}
-在式 \eqref{hiii} 中，令$ \delta-\sqrt{2}\omega_p=0 $，则含相位$ \delta $和$ \delta-\sqrt{2}\omega_p $的项均可忽略。此时可构建具有$ \ket{eg} $、$ \ket{ge} $、$ \psi_+ $三个能级的系统，而$ J_{12} $数量级有望减小，从而实现更快速的SWAP门。
+在式 \eqref{hiii} 中，令$ \delta-\sqrt{2}\omega_p=0 $，则含相位$ \delta $和$ \delta-\sqrt{2}\omega_p $的项均可忽略。此时可构建具有$ \ket{eg} $、$ \ket{ge} $、$ \psi_+ $三个能级的系统，而$ J_{12} $数量级有望增大，从而实现更快速的SWAP门。
 \end{frame}
 \begin{frame}{拓扑量子信息传输}
 将2个原子推广成一列原子，此时有望实现量子态从最左的原子传到最右边，即实现拓扑量子信息传输。
