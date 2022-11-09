@@ -45,6 +45,7 @@
 }
 
 \setbeamertemplate{sidebar right}{}%去掉默认添加的navigarion symbols
+\setbeamercovered{transparent}%使未点出来的文字呈现透明，默认0.15透明度
 
 \usepackage[backend=biber,bibstyle=gb7714-2015,citestyle=verbose]{biblatex}
 \addbibresource{../reference.bib}
@@ -80,16 +81,92 @@
 
 \section{课题背景}
 \begin{frame}{量子信息技术}
-摩尔定律，量子信息的快速计算、不可监听……总之非常有前景；但目前极不成熟，故很值得研究（两页？）
+量子信息技术的优势
+\begin{enumerate}
+\item 研究真实世界演化：只有用量子计算机才能高效模拟量子世界\footcite{1999Simulating}
+\item 快速算法：如Grover搜索算法、Shor质因数分解算法
+\item 量子隐形传态：一旦窃听就会暴露
+\item ……
+\end{enumerate}
+当前的研究障碍
+\begin{enumerate}
+\item 硬件上，可用的量子比特数目和量子门操作保真度远远没有达到量子计算机要求
+\item 软件上，能发挥量子计算优势的量子算法难以编写
+\end{enumerate}
 \end{frame}
 \begin{frame}{量子比特与量子逻辑门}
-查Nielsen and Chuang
+单个量子比特：$ \ket{\psi}=\alpha\ket{0}+\beta\ket{1} $
+
+多个量子比特：$ \ket{\psi}=\sum\alpha_{i_1\cdots i_n}\ket{i_1\cdots i_n},~i_1,\cdots,i_n=0,1 $
+
+单量子比特门：如Hadamard门，Pauli-X门
+\begin{figure}
+\centering
+\includegraphics[scale=0.25]{figures/gate1}
+%\caption{}
+\label{fig:gate1}
+\end{figure}
+
+多量子比特门：如Controlled-NOT门，SWAP门，Toffoli门
+\begin{figure}
+\centering
+\includegraphics[scale=0.25]{figures/gaten}
+%\caption{}
+\label{fig:gaten}
+\end{figure}
 \end{frame}
+
 \begin{frame}{实现量子逻辑门的物理方法}
-有……多种方法，我研究里德堡中性原子，它的优点有……（查老师毕业论文）
+当前有潜力实现量子计算的物理平台有很多，如
+\begin{enumerate}
+\item 囚禁离子量子比特平台
+\item 超导人造原子量子比特平台
+\item 囚禁中性原子量子比特平台
+\item 中性里德堡原子平台
+\end{enumerate}
+中性里德堡原子平台的优势
+\begin{enumerate}
+\item 完美全同、易于扩展、相干时间长
+\item 具有良好的连通性，里德堡原子平台具有实现涉及超过两个原子的多量子比特门
+\item 仅仅通过使用外部的控制场便可以实现对中性原子外部状态和内部状态的操纵
+\end{enumerate}
 \end{frame}
+
+\begin{frame}{里德堡原子}
+里德堡原子：处于主量子数$ n $很大的量子态的原子
+
+里德堡相互作用：多个里德堡原子的相互作用
+\begin{enumerate}
+\item 两个原子，跃迁能量差相等：偶极-偶极相互作用，$ V\propto R^{-3} $
+\item 两个原子，跃迁能量差不等：van der Vaals相互作用，$ V\propto R^{-6} $
+\item 三个及以上原子：F\"orster共振相互作用
+\end{enumerate}
+
+\begin{figure}
+\begin{minipage}{0.4\linewidth}
+\centering
+\includegraphics[width=\linewidth]{figures/v-dd}
+\caption{偶极-偶极相互作用}
+\label{fig:v-dd}
+\end{minipage}
+\qquad
+\begin{minipage}{0.4\linewidth}
+\centering
+\includegraphics[width=0.8\linewidth]{figures/v-vdw}
+\caption{van der Vaals相互作用}
+\label{fig:v-vdw}
+\end{minipage}
+\end{figure}
+
+\end{frame}
+
 \begin{frame}{研究里德堡原子系统的一般步骤}
-写哈密顿量、表象变换化简、大失谐近似求有效哈密顿量、分析系统性质（本来要解薛定谔方程，但可以直接从有效哈密顿量系数中看出我们要的性质）（大致说这几步的目的，绘景变换公式等方法在下节讲）
+\begin{enumerate}
+\item 写出系统的哈密顿量
+\item 选取适当的表象，对哈密顿量进行变换，从而化简
+\item 取大失谐近似，求出系统的有效哈密顿量
+\item 分析系统性质（最一般的方法是解薛定谔方程，但也可以直接从有效哈密顿量的各项系数中看出系统的性质）
+\end{enumerate}
 \end{frame}
 \section{当前进展}
 \begin{frame}{哈密顿量}
@@ -105,11 +182,11 @@
 \begin{frame}{哈密顿量}
 在半经典理论中，单个原子与光场作用的哈密顿量为
 \begin{equation}
-H_{\mathrm{novdW},j}^\mathrm{S}=\hbar(\omega_g\ketbra{g}{g}_j+\omega_i\ketbra{r}{r}_j+\omega_e\ketbra{e}{e}_j+(\Omega_j\ketbra{g}{r}_j+\Omega_p\ketbra{e}{r}_j+\hc))
+H_j^\mathrm{S}=\hbar(\omega_g\ketbra{g}{g}_j+\omega_i\ketbra{r}{r}_j+\omega_e\ketbra{e}{e}_j+(\Omega_j\ketbra{g}{r}_j+\Omega_p\ketbra{e}{r}_j+\hc))
 \end{equation}
 变换到相互作用绘景，得
 \begin{equation}\label{}
-H_{\mathrm{novdW},j}^\mathrm{I}=\hbar(\mathrm{e}^{\mathrm{i}t\delta}\Omega_j\ketbra{g}{r}_j+\mathrm{e}^{\mathrm{i}t\Delta}\Omega_p\ketbra{e}{r}_j+\hc)
+H_j^\mathrm{I}=\hbar(\mathrm{e}^{\mathrm{i}t\delta}\Omega_j\ketbra{g}{r}_j+\mathrm{e}^{\mathrm{i}t\Delta}\Omega_p\ketbra{e}{r}_j+\hc)
 \end{equation}
 其中$ \delta=\Omega-\omega_r+\omega_g,\Delta=\Omega_p-\omega_r+\omega_e
  $为失谐量，其量级满足
@@ -151,11 +228,11 @@ H^{\mathrm{II}}=\hbar(\Omega_1\eit{\delta}\ketbra{ge}{re}
 \begin{gathered}
 E_+=\sqrt{2}\hbar\Omega_p,\quad\ket{\psi_+}=\frac{1}{2}\ket{er}+\frac{1}{\sqrt{2}}\ket{rr}+\frac{1}{2}\ket{re},\\
 E_0=0,\quad\ket{\psi_0}=\frac{1}{\sqrt{2}}\ket{er}-\frac{1}{\sqrt{2}}\ket{re},\\
-E_-=-\sqrt{2}\hbar\Omega_p,\quad\ket{\psi_-}=\frac{1}{2}\ket{er}-\frac{1}{\sqrt{2}}\ket{rr}+\frac{1}{2}\ket{re}.
+E_-=-\sqrt{2}\hbar\Omega_p,\quad\ket{\psi_-}=\frac{1}{2}\ket{er}-\frac{1}{\sqrt{2}}\ket{rr}+\frac{1}{2}\ket{re}
 \end{gathered}
 \end{equation}}
 将其本征态$ \ket{\psi_+},\ket{\psi_0},\ket{\psi_-} $作为新的基，再进行相互作用绘景变换，得到最终哈密顿量的形式为
-{\small\begin{multline}
+{\small\begin{multline}\label{hiii}
 H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}-\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\\
 +\ket{eg}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}+\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\Bigg)+\hc
 \end{multline}}
@@ -173,14 +250,25 @@ H_{\eff}=\hbar\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\
 {\small\begin{equation}
 J_{12}=\frac{\Omega^2}{4}\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}-\frac{2}{\delta}+\frac{1}{\delta+\sqrt{2}\Omega_p}\Bigg)=\frac{\Omega^2\Omega_p^2}{\delta^3-2\delta\Omega_p^2}
 \end{equation}}
-这是一个SWAP门，$ J_{12} $反映了量子门的开关速率。
+这说明系统是一个SWAP门，$ J_{12} $反映了量子门的开关速率。
 \end{frame}
 \section{未来计划}
 \begin{frame}{快速SWAP门}
-在前式中，令delta-sqrt2omegap=0，保留前两项，有望构建具有…、…、…三个能级的系统，而J12数量级有望减小（……阶动力学），从而实现更快速的SWAP门。
+\begin{multline*}
+H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}-\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\\
++\ket{eg}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e}^{\mathrm{i}t(\delta-\sqrt{2}\Omega_p)}+\frac{1}{\sqrt{2}}\bra{\psi_0}\eit{\delta}+\frac{1}{2}\bra{\psi_-}\eit{(\delta+\sqrt{2}\Omega_p)}\Bigg)\Bigg)+\hc
+\end{multline*}
+在式 \eqref{hiii} 中，令$ \delta-\sqrt{2}\omega_p=0 $，则含相位$ \delta $和$ \delta-\sqrt{2}\omega_p $的项均可忽略。此时可构建具有$ \ket{eg} $、$ \ket{ge} $、$ \psi_+ $三个能级的系统，而$ J_{12} $数量级有望减小，从而实现更快速的SWAP门。
 \end{frame}
 \begin{frame}{拓扑量子信息传输}
-将2个原子推广成一列原子，此时有望实现量子态从最左边传到最右边（论文截图）
+将2个原子推广成一列原子，此时有望实现量子态从最左的原子传到最右边，即实现拓扑量子信息传输。
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figures/pra-energy-level-n}
+\caption{一维原子链}
+\label{fig:pra-energy-level-n}
+\end{figure}
+
 \end{frame}
 
 % 现在在每页脚注加参考文献，故不需要专门放一页参考文献
