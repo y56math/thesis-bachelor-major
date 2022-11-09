@@ -5,6 +5,7 @@
 \usepackage{fancybox,xcolor,booktabs,colortbl}
 \usepackage{physics}
 \usepackage{../mycommand}%我惯用的命令，在本project中，存储在本文件的父文件夹
+\graphicspath{{../figures/}}
 
 \usefonttheme{professionalfonts}
 \usepackage[UTF8,fontset=none,scheme=chinese]{ctex}
@@ -44,6 +45,7 @@
 	language=c
 }
 
+\setbeamertemplate{caption}[numbered]%添加图片的编号
 \setbeamertemplate{sidebar right}{}%去掉默认添加的navigarion symbols
 \setbeamercovered{transparent}%使未点出来的文字呈现透明，默认0.15透明度
 
@@ -83,7 +85,7 @@
 \begin{frame}{量子信息技术}
 量子信息技术的优势
 \begin{enumerate}
-\item 研究真实世界演化：只有用量子计算机才能高效模拟量子世界\footcite{1999Simulating}
+\item 研究真实世界演化：只有用量子计算机才能高效模拟量子世界\footcite{1999Simulating}%此处引用有bug???
 \item 快速算法：如Grover搜索算法、Shor质因数分解算法
 \item 量子隐形传态：一旦窃听就会暴露
 \item ……
@@ -102,7 +104,7 @@
 单量子比特门：如Hadamard门，Pauli-X门
 \begin{figure}
 \centering
-\includegraphics[scale=0.25]{figures/gate1}
+\includegraphics[scale=0.25]{gate1}
 %\caption{}
 \label{fig:gate1}
 \end{figure}
@@ -110,7 +112,7 @@
 多量子比特门：如Controlled-NOT门，SWAP门，Toffoli门
 \begin{figure}
 \centering
-\includegraphics[scale=0.25]{figures/gaten}
+\includegraphics[scale=0.25]{gaten}
 %\caption{}
 \label{fig:gaten}
 \end{figure}
@@ -145,14 +147,14 @@
 \begin{figure}
 \begin{minipage}{0.4\linewidth}
 \centering
-\includegraphics[width=\linewidth]{figures/v-dd}
+\includegraphics[width=\linewidth]{v-dd}
 \caption{偶极-偶极相互作用}
 \label{fig:v-dd}
 \end{minipage}
 \qquad
 \begin{minipage}{0.4\linewidth}
 \centering
-\includegraphics[width=0.8\linewidth]{figures/v-vdw}
+\includegraphics[width=0.8\linewidth]{v-vdw}
 \caption{van der Vaals相互作用}
 \label{fig:v-vdw}
 \end{minipage}
@@ -170,10 +172,10 @@
 \end{frame}
 \section{当前进展}
 \begin{frame}{哈密顿量}
-目前复现了\footcite{PhysRevA.105.032417}的一部分：两个Λ型原子与光场Raman相互作用。
+目前复现了\footcite{PhysRevA.105.032417}的一部分：两个Λ型原子与光场Raman相互作用
 \begin{figure}
 \centering
-\includegraphics[height=0.5\textheight]{figures/pra-energy-level}
+\includegraphics[height=0.5\textheight]{pra-energy-level}
 \caption{能级示意图（只显示了其中一个原子）}
 \label{fig:pra-energy-level}
 \end{figure}
@@ -250,7 +252,7 @@ H_{\eff}=\hbar\Omega^2\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}\left(-\frac{1}{4}\
 {\small\begin{equation}
 J_{12}=\frac{\Omega^2}{4}\Bigg(\frac{1}{\delta-\sqrt{2}\Omega_p}-\frac{2}{\delta}+\frac{1}{\delta+\sqrt{2}\Omega_p}\Bigg)=\frac{\Omega^2\Omega_p^2}{\delta^3-2\delta\Omega_p^2}
 \end{equation}}
-这说明系统是一个SWAP门，$ J_{12} $反映了量子门的开关速率。
+这说明系统是一个SWAP门，$ J_{12} $反映了量子门的开关速率
 \end{frame}
 \section{未来计划}
 \begin{frame}{快速SWAP门}
@@ -264,7 +266,7 @@ H^{\mathrm{III}}=\hbar\Omega\Bigg(\ket{ge}\Bigg(\frac{1}{2}\bra{\psi_+}\mathrm{e
 将2个原子推广成一列原子，此时有望实现量子态从最左的原子传到最右边，即实现拓扑量子信息传输。
 \begin{figure}
 \centering
-\includegraphics[width=0.7\linewidth]{figures/pra-energy-level-n}
+\includegraphics[width=0.7\linewidth]{pra-energy-level-n}
 \caption{一维原子链}
 \label{fig:pra-energy-level-n}
 \end{figure}
