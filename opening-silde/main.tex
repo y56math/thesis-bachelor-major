@@ -18,7 +18,7 @@
 \usepackage{unicode-math}
 \setmathfont{XITS Math}
 
-\usecolortheme{sustech}
+\usepackage{../beamercolorthemesustech}%效果同\usecolortheme{sustech}，但\usecolortheme不支持自由选择文件路径，故调用底层的\usepackage命令
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \definecolor{mygray}{gray}{.9}
@@ -48,7 +48,7 @@
 \setbeamertemplate{caption}[numbered]%添加图片的编号
 \setbeamertemplate{sidebar right}{}%去掉默认添加的navigarion symbols
 \setbeamercovered{transparent}%使未点出来的文字呈现透明，默认0.15透明度
-%\beamerdefaultoverlayspecification{}
+\beamerdefaultoverlayspecification{}
 
 \usepackage[backend=biber,bibstyle=gb7714-2015,citestyle=verbose]{biblatex}
 \addbibresource{../reference.bib}
