@@ -1,0 +1,195 @@
+\documentclass[10pt,aspectratio=43]{beamer}
+\usetheme{Berlin}
+
+\usepackage{amsmath,bm,amsfonts,amssymb,enumerate,graphicx,animate,epsfig,bbm,calc,color,ifthen,capt-of,multimedia}
+\usepackage{fancybox,xcolor,booktabs,colortbl}
+\usepackage{physics}
+\usepackage{../mycommand}%我惯用的命令，在本project中，存储在本文件的父文件夹
+\graphicspath{{../figures/}}
+
+\usefonttheme{professionalfonts}
+\usepackage[UTF8,fontset=none,scheme=chinese]{ctex}
+\setmainfont{Times}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+\setCJKmainfont{SimSun}[BoldFont=SimHei,ItalicFont=KaiTi]
+\setCJKsansfont{SimHei}
+\setCJKmonofont{Microsoft YaHei}
+\usepackage{unicode-math}
+\setmathfont{XITS Math}
+
+\usepackage{../beamercolorthemesustech}%效果同\usecolortheme{sustech}，但\usecolortheme不支持自由选择文件路径，故调用底层的\usepackage命令
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mygray}{gray}{.9}
+\definecolor{mypink}{rgb}{.99,.91,.95}
+\definecolor{mycyan}{cmyk}{.3,0,0,0}
+
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{verbatim,listings}
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color
+	basicstyle=\footnotesize\ttfamily,     % size of fonts used for the code
+	columns=fullflexible,
+	breaklines=true,                 % automatic line breaking only at whitespace
+	captionpos=b,                    % sets the caption-position to bottom
+	tabsize=4,
+	commentstyle=\color{mygreen},    % comment style
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	keywordstyle=\color{blue},       % keyword style
+	stringstyle=\color{mymauve}\ttfamily,     % string literal style
+	numbers=left, 
+	%	frame=single,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	% identifierstyle=\color{red},
+	language=c
+}
+
+\setbeamertemplate{caption}[numbered]%添加图片的编号
+\setbeamertemplate{sidebar right}{}%去掉默认添加的navigarion symbols
+\setbeamercovered{transparent}%使未点出来的文字呈现透明，默认0.15透明度
+\beamerdefaultoverlayspecification{}
+
+%\usepackage[backend=biber,bibstyle=gb7714-2015,citestyle=verbose]{biblatex}
+%\addbibresource{../reference.bib}
+
+%题目，作者，学校，日期
+\title{Boundedness and Stability}
+\subtitle{\fontsize{9pt}{14pt}\textbf{第一次\quad SDEM 5.1--5.2}}
+\author{杨徵羽}
+%\institute{哈尔滨工业大学(威海)理学院}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{5.1 Introduction}
+\begin{itemize}
+\item 稳定性引入（圆形壁上的小球）
+\item 稳定性定义（类比极限，先按$ \omega $分类，再按$ t $分类）
+\item Lyapunov方法（$ V $相当于势能，$ LV $相当于求导）
+\item 本章结构（两步建立稳定性判据）
+\item 对系统的假设：未扰动的解为0（不为0就作差）
+\item 对系统的假设：初值不随机（利用全概率公式）
+\end{itemize}
+\end{frame}
+
+\begin{frame}{全章结构}
+\begin{table}[htbp]%\caption{全章结构}\label{t1}\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{cccccc}
+\toprule
+稳定性种类 & 节 & 定义 & V函数判别法 & 系数判别法 & 例子 \\
+\midrule
+p阶矩渐近有界 & 5.2 & 1 & 2 & 3 & 4,5 \\
+p阶矩指数稳定 & 5.3 & 7 & 8 & 10,12,16 & 25,26,27 \\
+p阶矩渐近稳定 & 5.4 & 28 & 29,30,31 &  & 32,33 \\
+a.s.指数稳定 & 5.3 & 7 & 9 & 10,12,14,16 &  \\
+a.s.渐近稳定 & 5.4 & 28 & 29 &  &  \\
+依概率稳定 & 5.5 & 34 & 35 &  &  \\
+依概率渐近稳定 & 5.5 & 34 & 36 &  & 38 \\
+依概率渐近大范围稳定 & 5.5 & 34 & 37 &  &  \\
+依分布渐近稳定 & 5.6 & 40 & 43 & 44 & 45,46 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{5.2 Asymptotic Boundedness}
+\begin{itemize}
+\item Definition 5.1: p阶矩渐近稳定性定义
+\item Theorem 5.2: V函数判别法（辅助函数$ e^{\lambda t}V $，停时截断，$ \mathcal{K} $类函数，Jensen不等式）
+\item Theorem 5.3: 系数判别法（$ LV $计算，Young不等式，M-矩阵）
+\item Examples 5.4, 5.5: 数值算例
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $为常数）}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/1}
+\caption{样本轨迹，$ \alpha=0.1,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $为常数）}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/2}
+\caption{2阶矩，$ \alpha=0.1,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $为常数）}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/3}
+\caption{样本轨迹，$ \alpha=-0.1,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $为常数）}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/4}
+\caption{2阶矩，$ \alpha=-0.1,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $与$ r(t) $有关）
+}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/5}
+\caption{马尔可夫切换，$ \gamma=0.5,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $与$ r(t) $有关）
+}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/6}
+\caption{样本轨迹，$ \gamma=0.5,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $与$ r(t) $有关）
+}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/7}
+\caption{2阶矩，$ \gamma=0.5,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $与$ r(t) $有关）
+}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/8}
+\caption{马尔可夫切换，$ \gamma=1.5,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $与$ r(t) $有关）
+}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/9}
+\caption{样本轨迹，$ \gamma=1.5,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Example 5.4（$ \alpha $与$ r(t) $有关）
+}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{../figures/10}
+\caption{2阶矩，$ \gamma=1.5,\sigma=0.5 $}
+\end{figure}
+\end{frame}
+
+\end{document}
