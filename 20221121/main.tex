@@ -69,7 +69,7 @@
 \item 稳定性引入（圆形壁上的小球）
 \item 稳定性定义（类比极限，先按$ \omega $分类，再按$ t $分类）
 \item Lyapunov方法（$ V $相当于势能，$ LV $相当于求导）
-\item 本章结构（两步建立稳定性判据）
+\item 全章结构（两步建立稳定性判据）
 \item 对系统的假设：未扰动的解为0（不为0就作差）
 \item 对系统的假设：初值不随机（利用全概率公式）
 \end{itemize}
@@ -95,6 +95,41 @@ a.s.渐近稳定 & 5.4 & 28 & 29 &  &  \\
 \end{tabular}
 }
 \end{table}
+\end{frame}
+
+\begin{frame}{初值不随机(SDE p.110)}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{../figures/x1}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{../figures/x2}
+\end{figure}
+\end{frame}
+
+\begin{frame}{初值不随机(SDE p.119)}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{../figures/x3}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{../figures/x4}
+\end{figure}
+\end{frame}
+
+\begin{frame}{初值不随机(SDE p.127)}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{../figures/x5}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{../figures/x6}
+\end{figure}
 \end{frame}
 
 \begin{frame}{5.2 Asymptotic Boundedness}
@@ -190,6 +225,62 @@ a.s.渐近稳定 & 5.4 & 28 & 29 &  &  \\
 \includegraphics[width=0.7\linewidth]{../figures/10}
 \caption{2阶矩，$ \gamma=1.5,\sigma=0.5 $}
 \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{markovianSwitching.m}
+\begin{lstlisting}[language=matlab,
+basicstyle=\ttfamily\scriptsize, 
+numberstyle=\scriptsize]
+function [rGrid] = markovianSwitching(Gamma, T, stepSize)
+N = length(Gamma); % the quantity of states
+iJump = 1; tJump(1) = 0; rJump(1) = randi(N); % initial value setting
+while tJump(iJump) < T
+      tJump(iJump+1) = tJump(iJump) + exprnd(-1/Gamma(rJump(iJump),rJump(iJump)));
+      distribution = Gamma(rJump(iJump),:);
+      distribution(rJump(iJump)) = 0;
+      distribution = distribution/sum(distribution);
+      rJump(iJump+1) = discretize(rand, cumsum([0 distribution]));
+      iJump = iJump + 1;
+end
+%% convert to time grid in order to be compatible with numerical solutions
+nJump = length(tJump);
+tGrid = 0:stepSize:T; nGrid = length(tGrid); rGrid = zeros(1, nGrid);
+tJumpGrid = ceil(tJump/stepSize);
+for iJump = 1:nJump-1
+    for iGrid = tJumpGrid(iJump)+1:tJumpGrid(iJump+1)
+        rGrid(iGrid) = rJump(iJump);
+    end
+end
+rGrid = rGrid(1:nGrid); % delete calculation beyond T
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{SDEMexample5\_4.m}
+\begin{lstlisting}[language=matlab,
+basicstyle=\ttfamily\scriptsize, 
+numberstyle=\scriptsize]
+clear;clc;close all;
+nSample = 25; T = 20; stepSize = 0.01;
+alpha = @(r)(1*(r==1)+(-1/2)*(r==2)); % a simple way of representing piecewise function
+sigma = 5; gamma = 1.5; Gamma = [[-4 4]; [gamma -gamma]];
+r = markovianSwitching(Gamma, T, stepSize); % one r(t) for all sample paths
+tGrid = 0:stepSize:T;
+nGrid = length(tGrid);
+f = @(x,t,r) alpha(r) * x;
+g = @(x,t,r) sigma;
+x = zeros(nSample, nGrid); % not `zeros(nGrid)`!!!
+for iSample = 1:nSample
+    x(1) = 1;
+    for iGrid = 1:nGrid - 1
+        x(iSample, iGrid + 1) = x(iSample, iGrid) + f(x(iSample, iGrid), iGrid, r(iGrid)) * stepSize + g(x(iSample, iGrid), iGrid, r(iGrid)) * normrnd(0, stepSize);
+    end
+end
+for iSample = 1:nSample
+    plot(tGrid,x(iSample, :)); hold on
+end
+p = 2; pthmoment = mean(x.^p, 1);
+plot(tGrid,pthmoment)
+\end{lstlisting}
 \end{frame}
 
 \end{document}
